@@ -1,30 +1,44 @@
-<!DOCTYPE html>
 <html>
-<title> </title>
+  <head>
+      <title>User page</title>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+  </head>
 
-  <h1 id = 'usertitle'> </h1>
+  <body>
 
-  <script>
-    onPageLoad();
+    <h1 id = 'usertitle'> </h1>
 
-    function onPageLoad()
-    {
-       var x = getParameterByName('user');
-       var elem = document.getElementById('usertitle');
-       elem.textContent = x;
-    }
+    <script>
+      document.getElementById('usertitle').textContent = getParameterByName('user');
 
-    function getParameterByName(name, url)
-    {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, "\\$&");
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
+      var config = {
+        apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
+        authDomain: "databaseeducation-fbf40.firebaseapp.com",
+        databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
+        projectId: "databaseeducation-fbf40",
+        storageBucket: "databaseeducation-fbf40.appspot.com",
+        messagingSenderId: "718098475610"
+      };
+      var defaultApp = firebase.initializeApp(config);
+      var mydb = defaultApp.database();
 
-  </script>
+      function getParameterByName(name, url)
+      {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+    </script>
+
+  <body>
 
 </html>
