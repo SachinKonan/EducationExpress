@@ -22,6 +22,59 @@
           };
           var defaultApp = firebase.initializeApp(config);
           var mydb = defaultApp.database();
+
+          function check(form)
+          {
+              var user = form.userid.value;
+              var pswrd = form.pswrd.value;
+              var email = form.email.value;
+              var phone = form.phone.value;
+
+              console.log(user + " " + "made a new account");
+              console.log(user + "'s password is: " + pswrd);
+              console.log(user + "'s email is: " + email);
+              console.log(user + "'s phone is: " + phone);
+
+              mydb.ref('users/' + user).set({
+                pswrd: pswrd,
+                email: email,
+                phone: phone,
+              });
+          }
+
+          function check1(form)
+          {
+
+              var user = form.userid.value;
+              var pswrd = form.pswrd.value;
+
+              console.log(user + " " + "is trying to log in");
+              console.log(user + "'s password might be: " + pswrd);
+              console.log('checking......');
+
+              mydb.ref('users/' + user).once('value', function(snap)
+              {
+                  var parsedData = JSON.parse(JSON.stringify(snap.val()));
+                  if(parsedData != null)
+                  {
+                    if(parsedData.pswrd == pswrd)
+                    {
+                      console.log('Logged in');
+                      window.open('user.html?user=' + user,'_self',);
+                    }
+                    else
+                    {
+                      console.log('Invalid password')
+                    }
+                  }
+                  else
+                  {
+                    console.log('invalid username');
+                  }
+              })
+
+          }
+
         </script>
 
         <h1>New User Login</h1>
@@ -35,93 +88,15 @@
             <input type="reset" value="Cancel"/>
         </form>
 
-        <script language="javascript">
-            function check(form)
-            {
-              /*
-                var config = {
-                  apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
-                  authDomain: "databaseeducation-fbf40.firebaseapp.com",
-                  databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
-                  projectId: "databaseeducation-fbf40",
-                  storageBucket: "databaseeducation-fbf40.appspot.com",
-                  messagingSenderId: "718098475610"
-                };
-                var defaultApp = firebase.initializeApp(config);
-                var mydb = defaultApp.database();*/
-
-
-                var user = form.userid.value;
-                var pswrd = form.pswrd.value;
-                var email = form.email.value;
-                var phone = form.phone.value;
-
-                console.log(user + " " + "made a new account");
-                console.log(user + "'s password is: " + pswrd);
-                console.log(user + "'s email is: " + email);
-                console.log(user + "'s phone is: " + phone);
-
-                mydb.ref('users/' + user).set({
-                  pswrd: pswrd,
-                  email: email,
-                  phone: phone,
-                });
-            }
-        </script>
-
         <h2>Returning User Login</h2>
 
         <form name="login">
             Username<input type="text" name="userid"/>
             Password<input type="password" name="pswrd"/>
-            <input type="button" onclick="check(this.form)" value="Return"/>
+            <input type="button" onclick="check1(this.form)" value="Return"/>
             <input type="reset" value="Cancel"/>
         </form>
 
-        <script language="javascript">
-            function check(form)
-            {
-
-                var user = form.userid.value;
-                var pswrd = form.pswrd.value;
-
-                console.log(user + " " + "is trying to log in");
-                console.log(user + "'s password might be: " + pswrd);
-                console.log('checking......');
-
-                mydb.ref('users/' + user).once('value', function(snap)
-                {
-                    var parsedData = JSON.parse(JSON.stringify(snap.val()));
-                    if(parsedData != null)
-                    {
-                      if(parsedData.pswrd == pswrd)
-                      {
-                        console.log('Logged in');
-                      }
-                      else
-                      {
-                        console.log('Invalid password')
-                      }
-                    }
-                    else
-                    {
-                      console.log('invalid username');
-                    }
-
-
-                    /*
-                    if( JSON.stringify(snap.val()).pswrd == pswrd)
-                    {
-                      console.log('You in the books')
-                    }
-                    else
-                    {
-                      console.log('You aint here')
-                    }*/
-                })
-
-            }
-        </script>
 
 
     </body>

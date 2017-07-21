@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<title> </title>
+
+  <h1 id = 'usertitle'> </h1>
+
+  <script>
+    onPageLoad();
+
+    function onPageLoad()
+    {
+       var x = getParameterByName('user');
+       var elem = document.getElementById('usertitle');
+       elem.textContent = x;
+    }
+
+    function getParameterByName(name, url)
+    {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+  </script>
+
+</html>
