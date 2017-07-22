@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Login page</title>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+
+    </head>
+
+    <body>
+        <script>
+          var config = {
+            apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
+            authDomain: "databaseeducation-fbf40.firebaseapp.com",
+            databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
+            projectId: "databaseeducation-fbf40",
+            storageBucket: "databaseeducation-fbf40.appspot.com",
+            messagingSenderId: "718098475610"
+          };
+          var defaultApp = firebase.initializeApp(config);
+          var mydb = defaultApp.database();
+
+          mydb.ref('users/' + 'Karthik').once('value', function(snap)
+          {
+              var parsedData = JSON.parse(JSON.stringify(snap.val()));
+              if(parsedData != null)
+              {
+                if(parsedData.pswrd == pswrd)
+                {
+                  console.log('Logged in');
+                  window.open('user.html?user=' + user,'_self',);
+                  //window.open('user1.html','_self',);
+                }
+                else
+                {
+                  console.log('Invalid password')
+                }
+              }
+              else
+              {
+                console.log('invalid username');
+              }
+          })
+
+        </script>
+
+
+
+    </body>
+</html>

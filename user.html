@@ -9,7 +9,10 @@
   </head>
 
   <body>
+    <h1 id = 'usertitle'> </h1>
+
     <script>
+
       document.getElementById('usertitle').textContent = getParameterByName('user');
 
       var config = {
@@ -36,7 +39,6 @@
 
     </script>
 
-    <h1 id = 'usertitle'> </h1>
     <input type="file" id="files" name="files[]" multiple />
     <output id="list"></output>
 

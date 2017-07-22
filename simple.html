@@ -29,6 +29,7 @@
               var pswrd = form.pswrd.value;
               var email = form.email.value;
               var phone = form.phone.value;
+              var childname = form.childname.value;
 
               console.log(user + " " + "made a new account");
               console.log(user + "'s password is: " + pswrd);
@@ -39,6 +40,7 @@
                 pswrd: pswrd,
                 email: email,
                 phone: phone,
+                childname: childname
               });
           }
 
@@ -52,9 +54,9 @@
               console.log(user + "'s password might be: " + pswrd);
               console.log('checking......');
 
-              mydb.ref('users/' + user).once('value', function(snap)
+              mydb.ref('users/' + user ).once('value', function(snap)
               {
-                  var parsedData = JSON.parse(JSON.stringify(snap.val()));
+                  var parsedData = snap.val();
                   if(parsedData != null)
                   {
                     if(parsedData.pswrd == pswrd)
@@ -83,6 +85,7 @@
         <form name="new login">
             Username<input type="text" name="userid"/>
             Password<input type="password" name="pswrd"/>
+            Childname<input type="text" name="childname"/>
             Email<input type="text" name="email"/>
             Phone<input type="text" name="phone"/>
             <input type="button" onclick="check(this.form)" value="New User"/>
