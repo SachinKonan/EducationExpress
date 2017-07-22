@@ -2,7 +2,7 @@ $(function() {
 
 	// chat aliases
 	var you = 'You';
-	var robot = 'Jarvis';
+	var robot = 'Friday';
 
 	// slow reply by 400 to 800 ms
 	var delayStart = 400;
@@ -23,7 +23,7 @@ $(function() {
 		$('.input input').val('');
 		updateChat(you, input);
 
-		var reply = bot.respondTo(input);
+		var reply = bot.respondTo(input, updateChat);
 		if(reply == null) return;
 
 		var latency = Math.floor((Math.random() * (delayEnd - delayStart)) + delayStart);
@@ -81,31 +81,18 @@ $(function() {
 
 		if(val.data != undefined)
 		{
-			if(val.data.First > 0)
+			var holder = 'Hi there ' + val.childname + '. Welcome Back.';
+			if(val.data.Math.test1 <= val.data.English.test1)
 			{
-				var holder = 'Hi there ' + val.childname + '. Welcome Back.';
-				if(val.data.First.Math <= val.data.First.English)
-				{
-					holder += 'Looks Like We need to work on Math ';
-					holder += 'Here is a link for ur Math level: ';
-					holder += 'https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view';
-				}
-				else
-				{
-					holder += 'Looks Like We need to work on English ';
-					holder += 'Here is a link for ur English level: ';
-					holder += 'https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view';
-				}
-				updateChat(robot, holder);
+				holder += 'Looks Like We need to work on Math ';
+				holder += 'https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view';
 			}
 			else
 			{
-				updateChat(robot, "You are on the wrong username");
+				holder += 'Looks Like We need to work on English. Print: ';
+				holder += '"https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view"';
 			}
-
-			mydb.ref('users/' + 'Shardul/' + 'data').set({
-				First: val.data.First + 1
-			});
+			updateChat(robot, holder);
 		}
 
 		else

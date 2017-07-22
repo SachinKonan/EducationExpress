@@ -1,4 +1,5 @@
-function chatBot() {
+function chatBot()
+{
 
 	// current user input
 	this.input;
@@ -13,32 +14,22 @@ function chatBot() {
 	 * @param input - input chat string
 	 * @return reply of chat-bot
 	 */
-	this.respondTo = function(input) {
 
+
+	this.respondTo = function(input, updateChat)
+	{
 		this.input = input.toLowerCase();
+		console.log(this.input);
 
-		if(this.match('(hi|hello|hey|hola|howdy)(\\s|!|\\.|$)'))
-			return "um... hi?";
+		const client = new ApiAi.ApiAiClient({accessToken: '7c5995ccebc045f6b8e7d5157be18203'});
+		const promise = client.textRequest(this.input);
 
-		if(this.match('what[^ ]* up') || this.match('sup') || this.match('how are you'))
-			return "this github thing is pretty cool, huh?";
-
-		if(this.match('l(ol)+') || this.match('(ha)+(h|$)') || this.match('lmao'))
-			return "what's so funny?";
-
-		if(this.match('^no+(\\s|!|\\.|$)'))
-			return "don't be such a negative nancy :(";
-
-		if(this.match('(cya|bye|see ya|ttyl|talk to you later)'))
-			return ["alright, see you around", "good teamwork!"];
-
-		if(this.match('(dumb|stupid|is that all)'))
-			return ["hey i'm just a proof of concept", "you can make me smarter if you'd like"];
-
-		if(this.input == 'noop')
-			return;
-
-		return input + " what?";
+		var val = promise.then(function handleResponse(serverResponse)
+		{
+			var hol = serverResponse.result.fulfillment.speech;
+			console.log(hol);
+			updateChat('Friday', hol);
+		});
 	}
 
 	/**
