@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Site made with Mobirise Website Builder v3.11.1, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v3.11.1, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo9.png" type="image/x-icon">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&subset=latin,cyrillic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700&subset=latin,vietnamese,latin-ext">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/puritym/css/style.css">
+  <link rel="stylesheet" href="assets/dropdown-menu/style.light.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+
+
+
+</head>
+<body>
+
+<section id="dropdown-menu-q">
+
+    <nav class="navbar navbar-dropdown bg-color transparent navbar-fixed-top">
+
+        <div class="container">
+
+            <div class="navbar-brand">
+                <a href="home.html" class="navbar-logo"><img src="assets/images/ee-repo-logo-128x128.png" alt="Mobirise"></a>
+                <a class="text-black" href="home.html">Education Express</a>
+            </div>
+
+            <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                ☰
+            </button>
+
+            <ul class="nav-dropdown collapse pull-xs-right navbar-toggleable-sm nav navbar-nav" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="home.html">Home</a></li><li class="nav-item dropdown open"><a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="https://mobirise.com/" aria-expanded="true">Worksheets</a><div class="dropdown-menu"><a class="dropdown-item" href="english.html">English</a><a class="dropdown-item" href="math.html">Math</a><a class="dropdown-item" href="social.html">Social</a></div></li><li class="nav-item"><a class="nav-link link" href="about.html">About</a></li></ul>
+
+        </div>
+
+    </nav>
+
+</section>
+
+<section class="mbr-section mbr-section-small mbr-after-navbar" id="form1-r" style="background-color: rgb(255, 255, 255); padding-top: 4.5rem; padding-bottom: 4.5rem;">
+  <script>
+          var config = {
+            apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
+            authDomain: "databaseeducation-fbf40.firebaseapp.com",
+            databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
+            projectId: "databaseeducation-fbf40",
+            storageBucket: "databaseeducation-fbf40.appspot.com",
+            messagingSenderId: "718098475610"
+          };
+          var defaultApp = firebase.initializeApp(config);
+          var mydb = defaultApp.database();
+
+          function check(form)
+          {
+              var user = form.userid.value;
+              var pswrd = form.pswrd.value;
+              var email = form.email.value;
+              var phone = form.phone.value;
+              var childname = form.childname.value;
+
+              console.log(user + " " + "made a new account");
+              console.log(user + "'s password is: " + pswrd);
+              console.log(user + "'s email is: " + email);
+              console.log(user + "'s phone is: " + phone);
+              console.log(user + "'s child's name is:" + childname);
+
+              mydb.ref('users/' + user).set({
+                pswrd: pswrd,
+                email: email,
+                phone: phone,
+                childname: childname,
+              });
+          }
+
+          function check1(form)
+          {
+
+              var user = form.userid.value;
+              var pswrd = form.pswrd.value;
+
+              console.log(user + " " + "is trying to log in");
+              console.log(user + "'s password might be: " + pswrd);
+              console.log('checking......');
+
+              mydb.ref('users/' + user).once('value', function(snap)
+              {
+                  var parsedData = JSON.parse(JSON.stringify(snap.val()));
+                  console.log(parsedData);
+
+                  if(parsedData != null)
+                  {
+                    if(parsedData.pswrd == pswrd)
+                    {
+                      console.log('Logged in');
+                      window.open('user.html?user=' + user,'_self',);
+                    }
+                    else
+                    {
+                      console.log('Invalid password')
+                    }
+                  }
+                  else
+                  {
+                    console.log('invalid username');
+                  }
+              })
+
+          }
+
+
+
+
+        </script>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" data-form-type="formoid">
+                <div data-form-alert="true"><div hidden="" data-form-alert-success="true">Thanks for filling out form!</div></div>
+
+                <h1 class="mbr-section-title display-3 text-xs-center">New User Login</h1>
+
+                <form action="https://mobirise.com/" method="post" data-form-title="New User Login">
+                    <input type="hidden" value="SFB++CxlUGCfQIH56XKuozhWQcMrMNKyM6XLX+gjyaZ2lefnfUkhM837P6Vj1wQIoHSHmD2FeyakBH0EfP8d2gbVEoZG8Jwfsg3py9apEzECIxin9gemKzUdEEgQW//n" data-form-email="true">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="userid" required="" placeholder="Username*" data-form-field="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="childname" required="" placeholder="Child Name*" data-form-field="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="pswrd" required="" placeholder="Password*" data-form-field="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="tex" class="form-control" name="email" required="" placeholder="Email*" data-form-field="Phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="phone" required="" placeholder="Phone*" data-form-field="Phone">
+                    </div>
+
+
+                    <div class="text-xs-right"><input type="button" class="btn btn-lg btn-secondary-outline" onclick="check(this.form)" value="New User"/></div>
+                </form>
+
+
+                <h1 class="mbr-section-title display-3 text-xs-center">Returning User Login</h1>
+
+
+                <form action="https://mobirise.com/" method="post" data-form-title="Returning User Login">
+                    <input type="hidden" value="SFB++CxlUGCfQIH56XKuozhWQcMrMNKyM6XLX+gjyaZ2lefnfUkhM837P6Vj1wQIoHSHmD2FeyakBH0EfP8d2gbVEoZG8Jwfsg3py9apEzECIxin9gemKzUdEEgQW//n" data-form-email="true">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="userid" required="" placeholder="Username*" data-form-field="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="pswrd" required="" placeholder="Password*" data-form-field="Password">
+                    </div>
+
+
+
+                    <div class="text-xs-right"><input type="button" class="btn btn-lg btn-secondary-outline" onclick="check1(this.form)" value="Login"/></div>
+                    <input type="reset" value="Cancel"/>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
+  <script src="assets/puritym/js/script.js"></script>
+  <script src="assets/dropdown-menu/script.js"></script>
+  <script src="assets/formoid/formoid.min.js"></script>
+
+
+</body>
+</html>
