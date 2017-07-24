@@ -83,6 +83,22 @@
 
           }
 
+        function caller()
+        {
+          function getParameterByName(name, url)
+          {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+          }
+
+          user = getParameterByName('user')
+          window.open('chatbot.html?user=' + user,'_self')
+        }
         </script>
 
         <h1>New User Login</h1>
