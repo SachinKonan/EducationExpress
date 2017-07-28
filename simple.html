@@ -10,12 +10,6 @@
     </head>
 
     <body>
-
-      <iframe
-        width="350"
-        height="430"
-        src="https://console.api.ai/api-client/demo/embedded/2c2f17bb-6866-4d62-b7c5-39ead1bf6e87">
-      </iframe>
         <script>
           var config = {
             apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
@@ -67,7 +61,7 @@
                     if(parsedData.pswrd == pswrd)
                     {
                       console.log('Logged in');
-                      window.open('user.html?user=' + user,'_self',);
+                      window.open('chatbot.html?user=' + user,'_self');
                       //window.open('user1.html','_self',);
                     }
                     else
