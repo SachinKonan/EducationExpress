@@ -84,12 +84,12 @@ $(function() {
 			var holder = 'Hi there ' + val.childname + '. Welcome Back.';
 			if(val.data.Math.test1 <= val.data.English.test1)
 			{
-				holder += 'Looks Like We need to work on Math ';
+				holder += ' Looks Like We need to work on Math ';
 				holder += 'https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view';
 			}
 			else
 			{
-				holder += 'Looks Like We need to work on English. Print: ';
+				holder += ' Looks Like We need to work on English. Print: ';
 				holder += '"https://drive.google.com/file/d/0B-suiGeYzcmnVzh4N3k4U0RVZTg/view"';
 			}
 			updateChat(robot, holder);
