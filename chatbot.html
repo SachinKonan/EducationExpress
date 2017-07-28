@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 	<head>
 		<title>chat-bot</title>
@@ -14,37 +13,6 @@
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
 		<script src="Api.js"></script>
 		<meta charset="UTF-8">
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v3.12.1, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="assets4/images/logo2.png" type="image/x-icon">
-  <meta name="description" content="Free Website Maker. Create awesome responsive websites. Easy and fast - No coding! Free for commercial use.">
-  <title>Free Mobile Website Builder Software</title>
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,500,700">
-  <link rel="stylesheet" href="assets4/web/assets/mobirise-icons/mobirise-icons.css">
-  <link rel="stylesheet" href="assets4/tether/tether.min.css">
-  <link rel="stylesheet" href="assets4/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets4/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets4/socicon/css/styles.css">
-  <link rel="stylesheet" href="assets4/theme/css/style.css">
-  <link rel="stylesheet" href="assets4/mobirise/css/mbr-additional.css" type="text/css">
-
-  <link rel="alternate" hreflang="x-default" href="https://mobirise.com" />
-  <link rel="alternate" hreflang="en" href="https://mobirise.com" />
-  <link rel="alternate" hreflang="es" href="https://mobirise.com/es/" />
-  <link rel="alternate" hreflang="de" href="https://mobirise.com/de/" />
-  <link rel="alternate" hreflang="fr" href="https://mobirise.com/fr/" />
-  <link rel="alternate" hreflang="it" href="https://mobirise.com/it/" />
-  <link rel="alternate" hreflang="nl" href="https://mobirise.com/nl/" />
-  <link rel="alternate" hreflang="pt" href="https://mobirise.com/pt/" />
-  <link rel="alternate" hreflang="ru" href="https://mobirise.com/ru/" />
-  <link rel="alternate" hreflang="ja" href="https://mobirise.com/ja/" />
-  <link rel="alternate" hreflang="sv" href="https://mobirise.com/sv/" />
-  <link rel="alternate" hreflang="fi" href="https://mobirise.com/fi/" />
-  <link rel="alternate" hreflang="da" href="https://mobirise.com/da/" />
-  <link rel="alternate" hreflang="no" href="https://mobirise.com/no/" />
 	</head>
 
 	<body>
@@ -153,10 +121,18 @@
 		        }
 		      }
 
-					packet.updateChat('Friday', 'Good Job ' + 'You missed: ' + numwrong.toString() + ' out of 5 problems')
-					packet.updateChat('Friday', 'You earned some game-time: ' + 'www.thepanopticdiorama.com/EducationExpress/games.html')
-					setEnglishCallBack( Math.round( ((6-numwrong)/6)*100));
+					packet.updateChat('Friday', 'Good Job ' + 'You missed: ' + numwrong.toString() + ' out of 6 problems')
+					if(numwrong <= 1)
+					{
+						packet.updateChat('Friday', 'You earned some game-time')
+						packet.updateChat('Friday', 'www.thepanopticdiorama.com/EducationExpress/games.html')
+					}
+					else
+					{
+						packet.updateChat('Friday', 'You should practice writing')
+					}
 
+					setEnglishCallBack( Math.round( ((6-numwrong)/6)*100));
 		      console.log(numwrong)
 					line.appendChild(pre)
 
@@ -164,38 +140,39 @@
 				log.insertBefore(line, log.firstChild)
 			}
 		}
-		function recognizeFile(file){
+		function recognizeFile(file)
+		{
+			var chat = $('.chat');
+			var updateChat = function(party, text)
+			{
+
+				var style = 'you';
+				if(party != 'You') {
+					style = 'other';
+				}
+
+				var line = $('<div><span class="party"></span> <span class="text"></span></div>');
+				line.find('.party').addClass(style).text(party + ':');
+				line.find('.text').text(text);
+
+				chat.append(line);
+
+				chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
+
+			}
+			updateChat('Friday', 'Thanks for uploading that file. We are grading right now')
+
 			document.querySelector("#log").innerHTML = ''
 			Tesseract.recognize(file, {
 				lang: document.querySelector('#langsel').value
 			})
 				.then(function(data)
 				{
-					var chat = $('.chat');
-					var updateChat = function(party, text)
-					{
-
-						var style = 'you';
-						if(party != 'You') {
-							style = 'other';
-						}
-
-						var line = $('<div><span class="party"></span> <span class="text"></span></div>');
-						line.find('.party').addClass(style).text(party + ':');
-						line.find('.text').text(text);
-
-						chat.append(line);
-
-						chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
-
-					}
-
-					updateChat('Friday', 'Thanks for uploading that file. We are grading right now')
-
 					console.log(data)
 					progressUpdate({ status: 'done', data: data, updateChat: updateChat })
 				})
 		}
+
 		</script>
 		<select id="langsel" onchange="window.lastFile && recognizeFile(window.lastFile)">
 		<option value='eng'     selected> English                </option>
