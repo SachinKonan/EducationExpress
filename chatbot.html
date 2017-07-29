@@ -1,187 +1,75 @@
 <html>
 	<head>
 		<title>chat-bot</title>
-		<link rel="stylesheet" type="text/css" href="csschatbot/reset.css" />
-		<link rel="stylesheet" type="text/css" href="csschatbot/index.css" />
+		<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
-		<script type="text/javascript" src="js/chat-bot.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
+
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
 		<script src="Api.js"></script>
+
+		<script>
+			var config = {
+				apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
+				authDomain: "databaseeducation-fbf40.firebaseapp.com",
+				databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
+				projectId: "databaseeducation-fbf40",
+				storageBucket: "databaseeducation-fbf40.appspot.com",
+				messagingSenderId: "718098475610"
+			};
+
+			function getParameterByName(name, url)
+			{
+				if (!url) url = window.location.href;
+				name = name.replace(/[\[\]]/g, "\\$&");
+				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+						results = regex.exec(url);
+				if (!results) return null;
+				if (!results[2]) return '';
+				return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+
+			var user = 'Shardul'
+
+			function caller()
+			{
+				window.open('user.html?user=' + user,'_self')
+			}
+
+			var defaultApp = firebase.initializeApp(config);
+			var mydb = defaultApp.database();
+		</script>
+
+		<script type="text/javascript" src="js/chat-bot.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+
 		<meta charset="UTF-8">
 	</head>
 
 	<body>
-			<script>
-				var config = {
-					apiKey: "AIzaSyAblirdcOBt8Z6I0oY-yKDuSleT-ImBQSA",
-					authDomain: "databaseeducation-fbf40.firebaseapp.com",
-					databaseURL: "https://databaseeducation-fbf40.firebaseio.com",
-					projectId: "databaseeducation-fbf40",
-					storageBucket: "databaseeducation-fbf40.appspot.com",
-					messagingSenderId: "718098475610"
-				};
 
-				function getParameterByName(name, url)
-		    {
-		      if (!url) url = window.location.href;
-		      name = name.replace(/[\[\]]/g, "\\$&");
-		      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		          results = regex.exec(url);
-		      if (!results) return null;
-		      if (!results[2]) return '';
-		      return decodeURIComponent(results[2].replace(/\+/g, " "));
-		    }
-
-
-
-				var user = getParameterByName('user')
-
-				function caller()
-		    {
-		      window.open('user.html?user=' + user,'_self')
-		    }
-
-				var defaultApp = firebase.initializeApp(config);
-				var mydb = defaultApp.database();
-			</script>
-		</script>
-
-		<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
 		<script>
-
-		function setEnglishCallBack(data)
-		{
-			mydb.ref('users/' + user + '/data/English').set({
-				test1: data,
-			});
-
-			mydb.ref('users/' + user + '/data/English').once('value', function(snap)
+			function caller()
 			{
-				var parsedData = snap.val();
-				console.log(parsedData)
-			});
-		}
-
-		function progressUpdate(packet){
-			var log = document.getElementById('log');
-			if(log.firstChild && log.firstChild.status === packet.status){
-				if('progress' in packet){
-					var progress = log.firstChild.querySelector('progress')
-					progress.value = packet.progress
-				}
-			}else{
-				var line = document.createElement('div');
-				line.status = packet.status;
-				var status = document.createElement('div')
-				status.className = 'status'
-				status.appendChild(document.createTextNode(packet.status))
-				line.appendChild(status)
-				if('progress' in packet){
-					var progress = document.createElement('progress')
-					progress.value = packet.progress
-					progress.max = 1
-					line.appendChild(progress)
-				}
-				if(packet.status == 'done')
-				{
-					var pre = document.createElement('pre')
-					pre.appendChild(document.createTextNode(''))
-					line.innerHTML = ''
-					line.appendChild(pre)
-		      key = "Â«u-=bee3?:butterflyg1?=snail[mayspiderf=dragonfly6=ladybug"
-
-		      key = [' bee',' butterfly', ' snail', ' spider', ' dragonfly', 'ladybug']
-
-		      answers = packet.data.text.split('\n');
-		      new1 = []
-		      numwrong = 0;
-
-		      answers.forEach(function(element)
-		      {
-		        if(element.indexOf(" ") == -1)
-		        {
-		          new1.push(element.substring(element.lastIndexOf("=")+1  ));
-		        }
-		        else
-		        {
-		          new1.push(element.substring(element.lastIndexOf(" ")));
-		        }
-		      });
-
-		      for(i = 0; i< new1.length; i++)
-		      {
-		        if(new1[i] == key[i])
-		        {
-		          numwrong+=1;
-		        }
-		      }
-
-					packet.updateChat('Friday', 'Good Job ' + 'You missed: ' + numwrong.toString() + ' out of 6 problems')
-					if(numwrong <= 1)
-					{
-						packet.updateChat('Friday', 'You earned some game-time')
-						packet.updateChat('Friday', 'www.thepanopticdiorama.com/EducationExpress/games.html')
-					}
-					else
-					{
-						packet.updateChat('Friday', 'You should practice writing')
-					}
-
-					setEnglishCallBack( Math.round( ((6-numwrong)/6)*100));
-		      console.log(numwrong)
-					line.appendChild(pre)
-
-				}
-				log.insertBefore(line, log.firstChild)
+				window.open('user.html?user=' + user,'_self');
 			}
-		}
-		function recognizeFile(file)
-		{
-			var chat = $('.chat');
-			var updateChat = function(party, text)
+
+			function caller1()
 			{
-
-				var style = 'you';
-				if(party != 'You') {
-					style = 'other';
-				}
-
-				var line = $('<div><span class="party"></span> <span class="text"></span></div>');
-				line.find('.party').addClass(style).text(party + ':');
-				line.find('.text').text(text);
-
-				chat.append(line);
-
-				chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
-
+				window.open('home.html','_self');
 			}
-			updateChat('Friday', 'Thanks for uploading that file. We are grading right now')
-
-			document.querySelector("#log").innerHTML = ''
-			Tesseract.recognize(file, {
-				lang: document.querySelector('#langsel').value
-			})
-				.then(function(data)
-				{
-					console.log(data)
-					progressUpdate({ status: 'done', data: data, updateChat: updateChat })
-				})
-		}
-
 		</script>
+
 		<select id="langsel" onchange="window.lastFile && recognizeFile(window.lastFile)">
-		<option value='eng'     selected> English                </option>
+			<option value='eng'     selected> English                </option>
 		</select>
 
-		<input type="file" onchange="recognizeFile(window.lastFile=this.files[0])">
-
 		<div id="log"></div>
-
 
 		<div class="container">
 			<h1 class="title">Friday</h1>
@@ -189,15 +77,16 @@
 			<div class="busy"></div>
 			<div class="input">
 				<input type="text" placeholder="Chat with me!" />
+				<input type="file" id="tests">
 				<a>Send</a>
 			</div>
 		</div>
+
 		<section>
-
-
-			<a class="btn btn-primary" onclick = "caller()">BACK</a>
-			<a class="btn btn-primary" href= "simple.html">HOME</a></div>
+			<button type="button" onclick="caller()">BACK</button>
+			<button type="button" onclick="caller1()">HOME</button>
 
 	 </section>
+
 	</body>
 </html>
