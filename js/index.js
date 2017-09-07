@@ -106,6 +106,9 @@ $(function() {
 		{
 			document.getElementById("tests").value = "";
 
+			mystorage.ref('Images/' + childname + '/input.jpg').put(fileinput).then(function(snapshot) {
+			  console.log('Uploaded a ur img!');
+			});
 			updateChat('Friday', 'Thanks for uploading that file. We are grading right now')
 
 			document.querySelector("#log").innerHTML = ''
@@ -175,8 +178,8 @@ $(function() {
 	$('.input a').bind('click', submitChat);
 
 	// initial chat state
-
-	mydb.ref('users/' + 'Shardul').once('value', function(snap)
+	var childname = null
+	mydb.ref('users/' + user).once('value', function(snap)
 	{
 			a(snap.val());
 	});
@@ -187,7 +190,8 @@ $(function() {
 
 		if(val.data != undefined)
 		{
-			updateChat(robot, 'Hi there ' + val.childname + '   Welcome Back.');
+			childname = val.childname
+			updateChat(robot, 'Hi there ' + childname + '   Welcome Back.');
 			if(val.data.Math.test1 <= val.data.English.test1)
 			{
 				updateChat(robot,'Looks Like We need to work on Math ')

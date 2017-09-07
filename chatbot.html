@@ -11,6 +11,7 @@
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-storage.js"></script>
 		<script src="Api.js"></script>
 
 		<script>
@@ -34,7 +35,7 @@
 				return decodeURIComponent(results[2].replace(/\+/g, " "));
 			}
 
-			var user = 'Shardul'
+			var user = getParameterByName('user')
 
 			function caller()
 			{
@@ -43,6 +44,7 @@
 
 			var defaultApp = firebase.initializeApp(config);
 			var mydb = defaultApp.database();
+			var mystorage = defaultApp.storage();
 		</script>
 
 		<script type="text/javascript" src="js/chat-bot.js"></script>
@@ -87,6 +89,5 @@
 			<button type="button" onclick="caller1()">HOME</button>
 
 	 </section>
-
 	</body>
 </html>
